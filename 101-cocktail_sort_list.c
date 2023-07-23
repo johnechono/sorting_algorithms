@@ -40,17 +40,18 @@ void _swap(listint_t **node, listint_t **list)
 void cocktail_sort_list(listint_t **list)
 {
 	listint_t *head, *aux;
-	int a = 0, c = -1, b = -1;
+	int c = 0, n = -1, m = -1;
 
 	if (!list || !(*list) || (!((*list)->prev) && !((*list)->next)))
 		return;
+
 	head = *list;
-	while (b >= c)
+	while (m >= n)
 	{
-		c++;
-		while (head->next && a != b)
+		n++;
+		while (head->next && c != m)
 		{
-			if (head->c > head->next->c)
+			if (head->n > head->next->n)
 			{
 				aux = head;
 			       _swap(&aux, list);
@@ -58,22 +59,23 @@ void cocktail_sort_list(listint_t **list)
 			       head = aux;
 			}
 
-			a++;
+			c++;
 			head = head->next;
 		}
-		if (c == 0)
-			b = a;
-		b--;
-		while (head->prev && a >= c)
+
+		if (n == 0)
+			m = c;
+		m--;
+		while (head->prev && c >= n)
 		{
-			if (head->c < head->prev->c)
+			if (head->n < head->prev->n)
 			{
 				aux = head->prev;
 				_swap(&aux, list);
 				print_list(*list);
 				head = aux->next;
 			}
-			a--;
+			c--;
 			head = head->prev;
 		}
 	}
